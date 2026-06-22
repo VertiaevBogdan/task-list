@@ -1,13 +1,42 @@
 package com.vert.backend.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.vert.backend.model.entity.Task;
+import com.vert.backend.service.TaskService;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("api/tasks")
 public class TaskController {
 
-    @GetMapping
-    public String index() {
-        return "index";
+    private final TaskService taskService;
+
+    public TaskController(TaskService taskService){
+        this.taskService  = taskService;
     }
+
+    @GetMapping
+    public List<Task> getAllTasks(){
+        return taskService.getAllTasks();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Task> getTaskById(Long id){
+        return taskService.getTaskById(id);
+    }
+
+    @GetMapping
+    public Task createTask(@RequestBody Task task){
+        return taskService.createTask(task);
+    }
+
+    @GetMapping("/{id}")
+    public void deleteTaskById(@PathVariable Long id) {
+        taskService.deleteTaskById(id);
+    }
+
+
+
 }
