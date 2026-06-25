@@ -1,11 +1,17 @@
 package com.vert.backend.dto.response;
 
 public class TaskResponse {
-    private Long id;
-    private String title;
-    private String text;
-    private boolean status;
+    private final Long id;
+    private final String title;
+    private final String text;
+    private final boolean status;
 
+    public TaskResponse (Long id, String title, String text, boolean status){
+        this.id = id;
+        this.title = title;
+        this.text = text;
+        this.status = status;
+    }
 
     public Long getId(){
         return id;
@@ -21,21 +27,5 @@ public class TaskResponse {
 
     public boolean getStatus(){
         return status;
-    }
-
-    public void setTitle(String title){
-        this.title = title;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setId(Long id){
-        this.id = id;
-    }
-
-    public void isStatus(boolean status){
-        this.status = status;
     }
 }
