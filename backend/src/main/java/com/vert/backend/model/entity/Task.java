@@ -20,10 +20,10 @@ public class Task {
 
     public Task() {}
 
-    public Task(String taskTitle, String text){
+    public Task(String taskTitle, String text, boolean status){
         this.title = taskTitle;
         this.text = text;
-        this.status = false;
+        this.status = status;
     }
 
     public Long getId(){

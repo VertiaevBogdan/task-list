@@ -1,5 +1,7 @@
 package com.vert.backend.controller;
 
+import com.vert.backend.dto.request.CreateTaskRequest;
+import com.vert.backend.dto.response.TaskResponse;
 import com.vert.backend.model.entity.Task;
 import com.vert.backend.service.TaskService;
 import org.springframework.web.bind.annotation.*;
@@ -18,18 +20,18 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> getAllTasks(){
+    public List<TaskResponse> getAllTasks(){
         return taskService.getAllTasks();
     }
 
     @GetMapping("/{id}")
-    public Optional<Task> getTaskById(Long id){
+    public Optional<TaskResponse> getTaskById(Long id){
         return taskService.getTaskById(id);
     }
 
     @PostMapping
-    public Task createTask(@RequestBody Task task){
-        return taskService.createTask(task);
+    public TaskResponse createTask(@RequestBody CreateTaskRequest request){
+        return taskService.createTask(request);
     }
 
     @DeleteMapping("/{id}")

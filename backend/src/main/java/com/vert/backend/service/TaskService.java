@@ -1,11 +1,15 @@
 package com.vert.backend.service;
 
+import com.vert.backend.dto.request.CreateTaskRequest;
+import com.vert.backend.dto.response.TaskResponse;
+import com.vert.backend.mapper.TaskMapper;
 import com.vert.backend.model.entity.Task;
 import com.vert.backend.repository.TaskRepository;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class TaskService {
@@ -16,16 +20,23 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
     
-    public List<Task> getAllTasks(){
-        return taskRepository.findAll();
+    public List<TaskResponse> getAllTasks(){
+        return taskRepository.findAll().stream().map(TaskMapper::toResponse).toList();
     }
     
-    public Optional<Task> getTaskById(Long id){
-        return taskRepository.findById(id);
+    public Optional<TaskResponse> getTaskById(Long id){
+
+        Task task = taskRepository.findTaskById(id);
+
+        return Optional.of(TaskMapper.toResponse(task));
     }
 
-    public Task createTask(Task task){
-        return taskRepository.save(task);
+    public TaskResponse createTask(CreateTaskRequest request){
+        Task task = TaskMapper.toEntity(request);
+
+        Task saved = taskRepository.save(task);
+
+        return TaskMapper.toResponse(saved);
     }
 
     public void deleteTaskById(Long id){

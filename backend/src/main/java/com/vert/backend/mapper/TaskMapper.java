@@ -19,7 +19,8 @@ public class TaskMapper {
     public static Task toEntity(CreateTaskRequest request){
         return new Task(
                 request.getTitle(),
-                request.getText()
+                request.getText(),
+                false
         );
     }
 }
