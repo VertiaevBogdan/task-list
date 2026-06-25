@@ -16,17 +16,17 @@ public class Task {
     private String text;
 
     @Column(name = "STATUS", nullable = false)
-    private Boolean status = false;
+    private boolean status = false;
 
     public Task() {}
 
-    public Task(String taskTitle, String text, Boolean status){
+    public Task(String taskTitle, String text, boolean status){
         this.title = taskTitle;
         this.text = text;
         this.status = status;
     }
 
-    public long getId(){
+    public Long getId(){
         return id;
     }
 
@@ -38,7 +38,7 @@ public class Task {
         return text;
     }
 
-    public Boolean getStatus(){
+    public boolean getStatus(){
         return status;
     }
 
@@ -50,7 +50,7 @@ public class Task {
         this.text = text;
     }
 
-    public void setStatus(Boolean status){
+    public void setStatus(boolean status){
         this.status = status;
     }
 }
