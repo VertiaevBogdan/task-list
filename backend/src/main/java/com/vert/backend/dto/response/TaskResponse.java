@@ -35,7 +35,7 @@ public class TaskResponse {
         this.id = id;
     }
 
-    public void setStatus(boolean status){
+    public void isStatus(boolean status){
         this.status = status;
     }
 }

@@ -38,7 +38,7 @@ public class Task {
         return text;
     }
 
-    public boolean getStatus(){
+    public boolean isStatus(){
         return status;
     }
 
