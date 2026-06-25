@@ -27,16 +27,14 @@ public class TaskController {
         return taskService.getTaskById(id);
     }
 
-    @GetMapping
+    @PostMapping
     public Task createTask(@RequestBody Task task){
         return taskService.createTask(task);
     }
 
-    @GetMapping("/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTaskById(@PathVariable Long id) {
         taskService.deleteTaskById(id);
     }
-
-
 
 }
