@@ -26,7 +26,8 @@ public class TaskService {
     
     public Optional<TaskResponse> getTaskById(Long id){
 
-        Task task = taskRepository.findTaskById(id);
+        Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found" +
+                ""));
 
         return Optional.of(TaskMapper.toResponse(task));
     }

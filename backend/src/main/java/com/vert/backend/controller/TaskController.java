@@ -25,7 +25,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Optional<TaskResponse> getTaskById(Long id){
+    public Optional<TaskResponse> getTaskById(@PathVariable Long id){
         return taskService.getTaskById(id);
     }
 
