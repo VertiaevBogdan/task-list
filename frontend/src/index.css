@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -21,6 +23,9 @@ body {
     line-height: 1.5;
     /* 5. Improve text rendering */
     -webkit-font-smoothing: antialiased;
+    margin-right: auto;
+    margin-left:  auto;
+    max-width: 1440px;
 }
 
 /* 6. Improve media defaults */
