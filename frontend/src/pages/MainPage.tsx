@@ -1,6 +1,7 @@
 import TaskForm from "../components/TaskForm.tsx";
 import {createTask} from "../api/task.ts";
 
+
 export type Task = {
     title: string;
     text: string;

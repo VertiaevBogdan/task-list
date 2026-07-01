@@ -8,3 +8,8 @@ export async function createTask(task: Task){
     return response.data;
 }
 
+export async function getTasks(): Promise <Task[]>{
+        const response = await api.get("/tasks");
+
+        return response.data;
+}
