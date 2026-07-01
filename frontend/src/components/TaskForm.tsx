@@ -1,10 +1,6 @@
-import {useState} from "react";
+import { useState } from "react";
 import * as React from "react";
-
-type Task = {
-    title: string;
-    text: string;
-};
+import type { Task } from "../pages/MainPage"
 
 export default function TaskForm({onSave} : {
     onSave: (task: Task) => void;
