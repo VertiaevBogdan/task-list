@@ -1,5 +1,5 @@
 import TaskForm from "../components/TaskForm.tsx";
-import {useState} from "react";
+import {createTask} from "../api/task.ts";
 
 export type Task = {
     title: string;
@@ -8,9 +8,15 @@ export type Task = {
 
 export default function MainPage(){
 
-    const [, setTask] = useState<Task | null>(null);
+    async function handleSave(task: Task){
+        try {
+            await createTask(task);
+        } catch (error){
+            console.error(error);
+        }
+    }
 
     return <main>
-        <TaskForm onSave={setTask} />
+        <TaskForm onSave={handleSave} />
     </main>
 }

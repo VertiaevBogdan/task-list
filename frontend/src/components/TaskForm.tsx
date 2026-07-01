@@ -1,10 +1,12 @@
 import { useState } from "react";
 import * as React from "react";
-import type { Task } from "../pages/MainPage"
+import type { Task } from "../pages/MainPage";
 
-export default function TaskForm({onSave} : {
+type Props = {
     onSave: (task: Task) => void;
-}){
+}
+
+export default function TaskForm({onSave} : Props){
     const [form, setForm] = useState<Task>({
         title: "New task",
         text: "",
