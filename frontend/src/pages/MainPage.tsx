@@ -1,6 +1,8 @@
 import TaskForm from "../components/TaskForm.tsx";
 import {createTask} from "../api/task.ts";
 import type {Task} from "../types/Types.ts";
+import TasksList from "../components/TasksList.tsx";
+
 
 export default function MainPage(){
     async function handleSave(task: Task){
@@ -13,5 +15,6 @@ export default function MainPage(){
 
     return <main>
         <TaskForm onSave={handleSave} />
+        <TasksList />
     </main>
 }
