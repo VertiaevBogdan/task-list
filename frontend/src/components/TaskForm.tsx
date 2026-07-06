@@ -6,15 +6,18 @@ type Props = {
     onSave: (task:CreateTask) => void;
 }
 
+const initialForm = {
+    title: "New task",
+    text: "",
+}
+
 export default function TaskForm({onSave} : Props){
-    const [form, setForm] = useState <CreateTask>({
-        title: "New task",
-        text: "",
-    });
+    const [form, setForm] = useState <CreateTask>(initialForm);
 
     const handleSubmit = (e: React.FormEvent)=> {
         e.preventDefault();
         onSave(form);
+        setForm(initialForm);
     }
 
     return (

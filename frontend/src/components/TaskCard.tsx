@@ -7,7 +7,7 @@ type Props = {
 
 export default function TaskCard({task, onDelete}: Props){
     return (
-        <li className="card bg-base-100 w-96 shadow-sm relative">
+        <li className="card bg-base-100 max-h-[10em] w-96 shadow-sm relative">
             <button
                 className="btn hover:btn-error btn-square btn-sm absolute top-2 right-2"
                 onClick={() => onDelete(task.id)}
