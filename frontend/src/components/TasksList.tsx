@@ -1,24 +1,10 @@
-import {getTasks} from "../api/task.ts";
-import {useState, useEffect} from "react";
 import TaskCard from "./TaskCard.tsx"
 import type {Task} from "../types/Types.ts";
 
-
-
-export default function TasksList(){
-
-    const [tasks, setTasks] = useState<Task[]>([]);
-
-    useEffect(() => {
-        getTasks()
-            .then(response => {
-                setTasks(response)
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    }, [tasks])
-
+type Props = {
+    tasks: Task[];
+};
+export default function TasksList({tasks} : Props){
     return (
         <section>
             <span className="w-full p-4 pb-2 text-l opacity-60 tracking-wide">All tasks</span>

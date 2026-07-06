@@ -18,7 +18,7 @@ export default function TaskCard({task}: {task: Task}){
                 </svg>
             </button>
             <div className="card-body">
-                <h2 className="card-title">{task.title}!</h2>
+                <h2 className="card-title">{task.title}</h2>
                 <p>{task.text}</p>
 
                 <div className="card-actions justify-end">

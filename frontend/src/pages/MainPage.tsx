@@ -1,20 +1,41 @@
 import TaskForm from "../components/TaskForm.tsx";
-import {createTask} from "../api/task.ts";
-import type {CreateTask} from "../types/Types.ts";
+import {createTask, getTasks} from "../api/task.ts";
+import type {CreateTask, Task} from "../types/Types.ts";
 import TasksList from "../components/TasksList.tsx";
+import {useState, useEffect} from "react";
 
 
 export default function MainPage(){
-    async function handleSave(task: CreateTask){
+    const [tasks, setTasks] = useState<Task[]>([]);
+
+    const loadTasks = async () =>{
         try {
-            await createTask(task);
+            const response = await getTasks();
+            setTasks(response);
         } catch (error){
             console.error(error);
         }
     }
 
+    useEffect(() => {
+        loadTasks();
+    }, [])
+
+    async function handleSave(task: CreateTask){
+        try {
+            await createTask(task);
+            await loadTasks();
+        } catch (error){
+            console.error(error);
+        }
+    }
+
+
+
+
+
     return <main>
         <TaskForm onSave={handleSave} />
-        <TasksList />
+        <TasksList tasks={tasks}/>
     </main>
 }
