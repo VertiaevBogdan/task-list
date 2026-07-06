@@ -1,5 +1,5 @@
 import TaskForm from "../components/TaskForm.tsx";
-import {createTask, getTasks} from "../api/task.ts";
+import {createTask, getTasks, deleteTask} from "../api/task.ts";
 import type {CreateTask, Task} from "../types/Types.ts";
 import TasksList from "../components/TasksList.tsx";
 import {useState, useEffect} from "react";
@@ -30,12 +30,20 @@ export default function MainPage(){
         }
     }
 
+    const handleDelete = async (id: number)=> {
+        await deleteTask(id);
+        await loadTasks();
+    }
+
 
 
 
 
     return <main>
         <TaskForm onSave={handleSave} />
-        <TasksList tasks={tasks}/>
+        <TasksList
+            tasks={tasks}
+            onDelete={handleDelete}
+        />
     </main>
 }

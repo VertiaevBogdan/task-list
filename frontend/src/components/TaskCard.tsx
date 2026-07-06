@@ -1,9 +1,17 @@
 import type {Task} from "../types/Types.ts";
 
-export default function TaskCard({task}: {task: Task}){
+type Props = {
+    task: Task;
+    onDelete: (id: number) => void;
+}
+
+export default function TaskCard({task, onDelete}: Props){
     return (
         <li className="card bg-base-100 w-96 shadow-sm relative">
-            <button className="btn btn-square btn-sm absolute top-2 right-2">
+            <button
+                className="btn hover:btn-error btn-square btn-sm absolute top-2 right-2"
+                onClick={() => onDelete(task.id)}
+            >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"

@@ -7,6 +7,10 @@ export async function createTask(task: CreateTask){
     return response.data;
 }
 
+export async function deleteTask(id: number){
+    await api.delete(`tasks/${id}`);
+}
+
 export async function getTasks(): Promise <Task[]>{
         const response = await api.get("/tasks");
 
