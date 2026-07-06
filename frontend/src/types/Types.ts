@@ -3,3 +3,8 @@ export type Task = {
     title: string;
     text: string;
 };
+
+export type CreateTask = {
+    title: string;
+    text: string;
+}

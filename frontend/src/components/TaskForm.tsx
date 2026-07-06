@@ -1,13 +1,13 @@
 import { useState } from "react";
 import * as React from "react";
-import type { Task } from "../pages/MainPage";
+import type { CreateTask } from "../types/Types.ts";
 
 type Props = {
-    onSave: (task: Task) => void;
+    onSave: (task:CreateTask) => void;
 }
 
 export default function TaskForm({onSave} : Props){
-    const [form, setForm] = useState<Task>({
+    const [form, setForm] = useState <CreateTask>({
         title: "New task",
         text: "",
     });

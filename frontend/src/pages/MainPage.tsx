@@ -1,11 +1,11 @@
 import TaskForm from "../components/TaskForm.tsx";
 import {createTask} from "../api/task.ts";
-import type {Task} from "../types/Types.ts";
+import type {CreateTask} from "../types/Types.ts";
 import TasksList from "../components/TasksList.tsx";
 
 
 export default function MainPage(){
-    async function handleSave(task: Task){
+    async function handleSave(task: CreateTask){
         try {
             await createTask(task);
         } catch (error){
