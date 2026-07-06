@@ -20,11 +20,13 @@ export default function TasksList(){
     }, [tasks])
 
     return (
-        <ul className="list bg-base-200 rounded-box shadow-md">
-            <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">All tasks</li>
-            {tasks.map(task => (
-                <TaskCard task={task}/>
-            ))}
-        </ul>
+        <section>
+            <span className="w-full p-4 pb-2 text-l opacity-60 tracking-wide">All tasks</span>
+            <ul className="bg-base-200 rounded-box shadow-md grid grid-cols-[repeat(auto-fill,minmax(24rem,1fr))] gap-4 p-4">
+                {tasks.map(task => (
+                    <TaskCard task={task}/>
+                ))}
+            </ul>
+        </section>
     )
 }
