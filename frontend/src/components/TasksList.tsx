@@ -4,6 +4,7 @@ import type {Task} from "../types/Types.ts";
 type Props = {
     tasks: Task[];
     onDelete: (id: number) => void;
+    onToggle: (id: number) => Task;
 };
 export default function TasksList({ tasks, onDelete} : Props){
     return (

@@ -16,3 +16,9 @@ export async function getTasks(): Promise <Task[]>{
 
         return response.data;
 }
+
+export async function switchTaskStatus(id: number){
+        const response = await api.put(`tasks/${id}`);
+
+        return response.data;
+}
