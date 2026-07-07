@@ -2,7 +2,7 @@ export type Task = {
     id: number;
     title: string;
     text: string;
-    staus: string;
+    status: boolean;
 };
 
 export type CreateTask = {
