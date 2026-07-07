@@ -40,7 +40,7 @@ public class TaskService {
         return TaskMapper.toResponse(saved);
     }
 
-    public TaskResponse UpdateTaskById(Long id, TaskRepository taskRepository){
+    public TaskResponse updateTaskById(Long id){
         Task task = taskRepository.findById(id).orElseThrow(() -> TaskNotFoundException);
         task.setStatus(!task.isStatus());
         Task updatedTask = taskRepository.save(task);
