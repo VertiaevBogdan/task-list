@@ -1,8 +1,8 @@
 package com.vert.backend.controller;
 
 import com.vert.backend.dto.request.CreateTaskRequest;
+import com.vert.backend.dto.request.UpdateTaskRequest;
 import com.vert.backend.dto.response.TaskResponse;
-import com.vert.backend.model.entity.Task;
 import com.vert.backend.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +37,11 @@ public class TaskController {
     @DeleteMapping("/{id}")
     public void deleteTaskById(@PathVariable Long id) {
         taskService.deleteTaskById(id);
+    }
+
+    @PutMapping("/{id}")
+    public TaskResponse updateTaskByid(@PathVariable Long id, UpdateTaskRequest request) {
+       return taskService.updateTaskById(id);
     }
 
 }

@@ -8,7 +8,7 @@ export async function createTask(task: CreateTask){
 }
 
 export async function deleteTask(id: number){
-    await api.delete(`tasks/${id}`);
+    await api.delete(`/tasks/${id}`);
 }
 
 export async function getTasks(): Promise <Task[]>{
@@ -18,7 +18,7 @@ export async function getTasks(): Promise <Task[]>{
 }
 
 export async function switchTaskStatus(id: number){
-        const response = await api.put(`tasks/${id}`);
+        const response = await api.patch(`/tasks/${id}`);
 
         return response.data;
 }

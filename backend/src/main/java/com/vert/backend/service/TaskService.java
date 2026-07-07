@@ -15,6 +15,7 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final RuntimeException TaskNotFoundException = new RuntimeException("Task not found");
     
     public TaskService(TaskRepository taskRepository){
         this.taskRepository = taskRepository;
@@ -26,8 +27,7 @@ public class TaskService {
     
     public Optional<TaskResponse> getTaskById(Long id){
 
-        Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found" +
-                ""));
+        Task task = taskRepository.findById(id).orElseThrow(() -> TaskNotFoundException);
 
         return Optional.of(TaskMapper.toResponse(task));
     }
@@ -38,6 +38,14 @@ public class TaskService {
         Task saved = taskRepository.save(task);
 
         return TaskMapper.toResponse(saved);
+    }
+
+    public TaskResponse UpdateTaskById(Long id, TaskRepository taskRepository){
+        Task task = taskRepository.findById(id).orElseThrow(() -> TaskNotFoundException);
+        task.setStatus(!task.isStatus());
+        Task updatedTask = taskRepository.save(task);
+
+        return TaskMapper.toResponse(updatedTask);
     }
 
     public void deleteTaskById(Long id){
