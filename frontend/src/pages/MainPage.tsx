@@ -36,8 +36,12 @@ export default function MainPage(){
     }
 
     const handleSwitch() = async (id: number) => {
-        await switchTaskStatus(id);
-        await loadTasks(); // v budoucnu realizovat zmenu stavu bez reloadu vsech tasku
+        try {
+            await switchTaskStatus(id);
+            await loadTasks(); // v budoucnu realizovat zmenu stavu bez reloadu vsech tasku
+        } catch (error){
+            console.error(error);
+        }
     }
 
     return <main>

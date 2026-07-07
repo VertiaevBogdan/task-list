@@ -3,9 +3,10 @@ import type {Task} from "../types/Types.ts";
 type Props = {
     task: Task;
     onDelete: (id: number) => void;
+    onToggle: (id: number) => Task;
 }
 
-export default function TaskCard({task, onDelete}: Props){
+export default function TaskCard({task, onDelete, onToggle}: Props){
     return (
         <li className="card bg-base-100 max-h-[10em] w-96 shadow-sm relative">
             <button
@@ -30,7 +31,10 @@ export default function TaskCard({task, onDelete}: Props){
                 <p>{task.text}</p>
 
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Done</button>
+                    <button
+                        className="btn btn-primary"
+                        onToggle={() => onToggle(task.id)}
+                    >Done</button>
                 </div>
             </div>
         </li>

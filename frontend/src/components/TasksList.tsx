@@ -16,6 +16,7 @@ export default function TasksList({ tasks, onDelete} : Props){
                         task={task}
                         key={task.id}
                         onDelete={onDelete}
+                        onToggle={onToggle}
                     />
                 ))}
             </ul>
