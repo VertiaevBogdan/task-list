@@ -3,10 +3,10 @@ import type {Task} from "../types/Types.ts";
 
 type Props = {
     tasks: Task[];
-    onDelete: (id: number) => void;
-    onToggle: (id: number) => Task;
+    onDelete: (id: number) => Promise<void>;
+    onToggle: (id: number) => Promise<void>;
 };
-export default function TasksList({ tasks, onDelete} : Props){
+export default function TasksList({ tasks, onDelete, onToggle} : Props){
     return (
         <section>
             <span className="w-full p-4 pb-2 text-l opacity-60 tracking-wide">All tasks</span>

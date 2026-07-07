@@ -3,7 +3,7 @@ import type {Task} from "../types/Types.ts";
 type Props = {
     task: Task;
     onDelete: (id: number) => void;
-    onToggle: (id: number) => Task;
+    onToggle: (id: number) => void;
 }
 
 export default function TaskCard({task, onDelete, onToggle}: Props){
@@ -33,7 +33,7 @@ export default function TaskCard({task, onDelete, onToggle}: Props){
                 <div className="card-actions justify-end">
                     <button
                         className="btn btn-primary"
-                        onToggle={() => onToggle(task.id)}
+                        onClick={() => onToggle(task.id)}
                     >Done</button>
                 </div>
             </div>
