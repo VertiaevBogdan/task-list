@@ -6,7 +6,13 @@ type Props = {
     onToggle: (id: number) => void;
 }
 
+
+
 export default function TaskCard({task, onDelete, onToggle}: Props){
+
+    const statusButtonText = task.status ? "Undo" : "Done";
+    const statusButtonStyle = task.status ? "btn-warning" : "btn-primary";
+
     return (
         <li className="card bg-base-100 max-h-[10em] w-96 shadow-sm relative">
             <button
@@ -32,9 +38,9 @@ export default function TaskCard({task, onDelete, onToggle}: Props){
 
                 <div className="card-actions justify-end">
                     <button
-                        className="btn btn-primary"
+                        className={`btn ${statusButtonStyle}`}
                         onClick={() => onToggle(task.id)}
-                    >Done</button>
+                    >{statusButtonText}</button>
                 </div>
             </div>
         </li>
