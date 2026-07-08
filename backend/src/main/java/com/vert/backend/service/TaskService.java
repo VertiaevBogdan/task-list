@@ -5,6 +5,7 @@ import com.vert.backend.dto.response.TaskResponse;
 import com.vert.backend.mapper.TaskMapper;
 import com.vert.backend.model.entity.Task;
 import com.vert.backend.repository.TaskRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class TaskService {
     }
     
     public List<TaskResponse> getAllTasks(){
-        return taskRepository.findAll().stream().map(TaskMapper::toResponse).toList();
+        return taskRepository.findAll(Sort.by(Sort.Direction.ASC, "id")).stream().map(TaskMapper::toResponse).toList();
     }
     
     public Optional<TaskResponse> getTaskById(Long id){
