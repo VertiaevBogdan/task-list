@@ -1,9 +1,9 @@
 package com.vert.backend.dto.request;
 
-public class UpdateTaskRequest {
+public class UpdateStausTaskRequest {
     private final boolean status;
 
-    public UpdateTaskRequest(boolean status){
+    public UpdateStausTaskRequest(boolean status){
         this.status = status;
     }
 }

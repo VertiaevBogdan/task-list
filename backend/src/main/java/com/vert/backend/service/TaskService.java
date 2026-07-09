@@ -1,6 +1,6 @@
 package com.vert.backend.service;
 
-import com.vert.backend.dto.request.CreateTaskRequest;
+import com.vert.backend.dto.request.TaskRequest;
 import com.vert.backend.dto.response.TaskResponse;
 import com.vert.backend.mapper.TaskMapper;
 import com.vert.backend.model.entity.Task;
@@ -33,7 +33,7 @@ public class TaskService {
         return Optional.of(TaskMapper.toResponse(task));
     }
 
-    public TaskResponse createTask(CreateTaskRequest request){
+    public TaskResponse createTask(TaskRequest request){
         Task task = TaskMapper.toEntity(request);
 
         Task saved = taskRepository.save(task);
@@ -47,6 +47,21 @@ public class TaskService {
         Task updatedTask = taskRepository.save(task);
 
         return TaskMapper.toResponse(updatedTask);
+    }
+
+    public TaskResponse editTaskById(Long id, TaskRequest request){
+        Task task = taskRepository.findById(id).orElseThrow(() -> TaskNotFoundException);
+        if (request.title != null){
+            task.setTitle(request.title);
+        }
+
+        if (request.text != null){
+            task.setText(request.text);
+        }
+
+        Task saved = taskRepository.save(task);
+
+        return TaskMapper.toResponse(saved);
     }
 
     public void deleteTaskById(Long id){

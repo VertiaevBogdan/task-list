@@ -1,6 +1,6 @@
 package com.vert.backend.controller;
 
-import com.vert.backend.dto.request.CreateTaskRequest;
+import com.vert.backend.dto.request.TaskRequest;
 //import com.vert.backend.dto.request.UpdateTaskRequest;
 import com.vert.backend.dto.response.TaskResponse;
 import com.vert.backend.service.TaskService;
@@ -30,7 +30,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public TaskResponse createTask(@RequestBody CreateTaskRequest request){
+    public TaskResponse createTask(@RequestBody TaskRequest request){
         return taskService.createTask(request);
     }
 
@@ -39,9 +39,16 @@ public class TaskController {
         taskService.deleteTaskById(id);
     }
 
-    @PatchMapping("/{id}")
-    public TaskResponse updateTaskById(@PathVariable Long id) {
+    @PatchMapping("/{id}/status")
+    public TaskResponse updateStatusTaskById(@PathVariable Long id) {
        return taskService.updateTaskById(id);
+    }
+
+    @PatchMapping("/{id}")
+    public TaskResponse editTaskById(
+            @PathVariable Long id,
+            @RequestBody TaskRequest request){
+        return taskService.editTaskById(id, request);
     }
 
 }

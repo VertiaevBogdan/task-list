@@ -5,8 +5,9 @@ type Props = {
     tasks: Task[];
     onDelete: (id: number) => Promise<void>;
     onToggle: (id: number) => Promise<void>;
+    onEdit: (task: Task) => void;
 };
-export default function TasksList({ tasks, onDelete, onToggle} : Props){
+export default function TasksList({ tasks, onDelete, onToggle, onEdit} : Props){
     return (
         <section>
             <span className="w-full p-4 pb-2 text-l opacity-60 tracking-wide">All tasks</span>
@@ -17,6 +18,7 @@ export default function TasksList({ tasks, onDelete, onToggle} : Props){
                         key={task.id}
                         onDelete={onDelete}
                         onToggle={onToggle}
+                        onEdit={onEdit}
                     />
                 ))}
             </ul>

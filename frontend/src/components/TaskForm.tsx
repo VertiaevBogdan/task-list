@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as React from "react";
 import type { CreateTask } from "../types/Types.ts";
-
+import Form from "./Form.tsx"
 type Props = {
     onSave: (task:CreateTask) => void;
 }
@@ -21,33 +21,18 @@ export default function TaskForm({onSave} : Props){
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex  justify-center">
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <legend className="fieldset-legend">Create task</legend>
+        <Form
+            title="Task title"
+            submitButtonText="Create"
+            form={form}
 
-                <label className="label">Title</label>
-                <input
-                    type="text"
-                    className="input"
-                    placeholder="Input task title"
-                    value={form.title}
-                    onChange={(e) => {
-                        setForm({...form, title: e.target.value})
-                    }}
-                />
+            onTitleChange={(value) =>
+                setForm({ ...form, title: value })}
 
-                <label className="label">Text</label>
-                <input
-                    type="text"
-                    className="textarea"
-                    value={form.text}
-                    onChange={(e) => {
-                        setForm({...form, text: e.target.value})
-                    }}
-                />
+            onTextChange={(value) =>
+                setForm({...form, text: value})}
 
-                <button className="btn btn-success mt-4" type="submit">Create</button>
-            </fieldset>
-        </form>
+            onSubmit={handleSubmit}
+        />
     )
 }

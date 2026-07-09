@@ -1,17 +1,19 @@
 import type {Task} from "../types/Types.ts";
+import Button from "./Button.tsx";
 
 type Props = {
     task: Task;
     onDelete: (id: number) => void;
     onToggle: (id: number) => void;
+    onEdit: (task: Task) => void;
 }
 
 
 
-export default function TaskCard({task, onDelete, onToggle}: Props){
+export default function TaskCard({task, onDelete, onToggle, onEdit}: Props){
 
     const statusButtonText = task.status ? "Undo" : "Done";
-    const statusButtonStyle = task.status ? "btn-warning" : "btn-primary";
+    const statusButtonStyle = task.status ? "btn-error" : "btn-success";
 
     return (
         <li className="card bg-base-100 max-h-[10em] w-96 shadow-sm relative">
@@ -36,11 +38,20 @@ export default function TaskCard({task, onDelete, onToggle}: Props){
                 <h2 className="card-title">{task.title}</h2>
                 <p>{task.text}</p>
 
-                <div className="card-actions justify-end">
-                    <button
-                        className={`btn ${statusButtonStyle}`}
+                <div className="card-actions justify-between">
+                    <Button
+                        buttonText="Edit"
+                        buttonClass="btn-warning"
+                        onClick={() => {
+                            onEdit(task);
+                        }
+                    }
+                    />
+                    <Button
+                        buttonText={statusButtonText}
+                        buttonClass={statusButtonStyle}
                         onClick={() => onToggle(task.id)}
-                    >{statusButtonText}</button>
+                    />
                 </div>
             </div>
         </li>

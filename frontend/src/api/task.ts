@@ -18,7 +18,19 @@ export async function getTasks(): Promise <Task[]>{
 }
 
 export async function switchTaskStatus(id: number){
-        const response = await api.patch(`/tasks/${id}`);
+        const response = await api.patch(`/tasks/${id}/status`);
 
         return response.data;
+}
+
+export async function editTask(
+    id: number,
+    data: CreateTask
+) {
+    const response = await api.patch(`/tasks/${id}`, {
+        title: data.title,
+        text: data.text
+    });
+
+    return response.data;
 }
