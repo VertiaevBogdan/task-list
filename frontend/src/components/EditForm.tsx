@@ -43,7 +43,6 @@ export default function EditForm({
             ref={dialogRef}
             className="modal"
         >
-            <div className="modal-box">
                 <Form
                     title="Edit task"
                     submitButtonText="Save"
@@ -71,7 +70,6 @@ export default function EditForm({
                         onSave(task.id, form);
                     }}
                 />
-            </div>
         </dialog>
     )
 }

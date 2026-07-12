@@ -19,15 +19,6 @@ export default function MainPage(){
             console.error(error);
         }
     }
-    //
-    // const editingTask = async (id: number) => {
-    //     try {
-    //         await editTask(id);
-    //         await loadTasks();
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
 
     useEffect(() => {
         loadTasks();
