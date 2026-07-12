@@ -1,4 +1,5 @@
 import Form from "./Form.tsx";
+import Button from "./Button.tsx";
 import {useEffect, useRef, useState} from "react";
 import type {CreateTask, Task} from "../types/Types.ts";
 
@@ -46,6 +47,12 @@ export default function EditForm({
                 <Form
                     title="Edit task"
                     submitButtonText="Save"
+                    extraButtons={
+                        <Button
+                            buttonText="Discard changes"
+                            buttonClass="btn-error flex-1"
+                        />
+                    }
                     form={form}
                     onTitleChange={(value) => {
                                 setForm(prev => ({

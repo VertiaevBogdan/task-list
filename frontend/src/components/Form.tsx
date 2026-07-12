@@ -1,5 +1,6 @@
 import type {CreateTask} from "../types/Types.ts";
 import Button from "./Button.tsx";
+import * as React from "react";
 
 type Props = {
     title: string;
@@ -13,6 +14,8 @@ type Props = {
     onTextChange: (value: string) => void;
 
     onSubmit: (e: React.FormEvent) => void;
+
+    extraButtons?: React.ReactNode;
 }
 
 export default function Form({
@@ -21,8 +24,28 @@ export default function Form({
     form,
     onTitleChange,
     onTextChange,
-    onSubmit
+    onSubmit,
+    extraButtons
 }: Props){
+
+    const hasExtraButtons = Boolean(extraButtons);
+
+    const submitButtonClass = hasExtraButtons
+        ? "btn-success flex-1"
+        : "btn-success w-full";
+
+    const buttons = (
+        <div className="flex gap-2 mt-4">
+            {extraButtons}
+            <Button
+                buttonText={submitButtonText}
+                buttonClass={submitButtonClass}
+                type="submit"
+            />
+        </div>
+    );
+
+
     return (
         <form onSubmit={onSubmit} className="flex  justify-center">
             <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
@@ -44,12 +67,7 @@ export default function Form({
                     value={form.text}
                     onChange={(event) => onTextChange(event.target.value)}
                 />
-
-                <Button
-                    buttonText={submitButtonText}
-                    buttonClass="btn-success"
-                    type="submit"
-                />
+                {buttons}
             </fieldset>
         </form>
     )
