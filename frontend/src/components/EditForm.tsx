@@ -7,12 +7,14 @@ type Props = {
     task: Task | null;
     isOpen: boolean;
     onSave: (id: number, data: CreateTask) => void;
-    onclose: () => void;
+    onClose: () => void;
 }
 
 export default function EditForm({
                                      task,
-                                     isOpen, onSave
+                                     isOpen,
+                                     onSave,
+                                     onClose
 }: Props) {
 
     const [form, setForm] = useState({
@@ -51,6 +53,8 @@ export default function EditForm({
                         <Button
                             buttonText="Discard changes"
                             buttonClass="btn-error flex-1"
+                            type="button"
+                            onClick={onClose}
                         />
                     }
                     form={form}

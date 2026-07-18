@@ -63,16 +63,17 @@ export default function MainPage(){
         }
     }
 
+    const handleCloseEdit = () => {
+        setIsModalOpen(false);
+        setEditingTask(null);
+    }
     return <main>
         <TaskForm onSave={handleSave} />
         <EditForm
             task={editingTask}
             isOpen={isModalOpen}
             onSave={handleEdit}
-            onclose={() => {
-                setIsModalOpen(false);
-                setEditingTask(null);
-            }}
+            onClose={handleCloseEdit}
         />
         <TasksList
             tasks={tasks}
