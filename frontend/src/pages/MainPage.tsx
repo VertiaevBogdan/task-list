@@ -10,6 +10,11 @@ export default function MainPage(){
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingTask, setEditingTask] = useState<Task | null>(null); // evidue stav ticketu, ktery editujeme
+    const [isAlertActive, setIsAlertActive] = useState(null);
+
+    const showAlert = () => {
+
+    }
 
     const loadTasks = async () =>{
         try {
