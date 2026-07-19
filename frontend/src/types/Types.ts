@@ -10,3 +10,9 @@ export type CreateTask = {
     text: string;
 }
 
+export type AlertTypeValue = "alert-success" | "alert-error";
+
+export type AlertType = {
+    message: string;
+    type: AlertTypeValue;
+}
