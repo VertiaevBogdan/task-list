@@ -3,6 +3,7 @@ export type Task = {
     title: string;
     text: string;
     status: boolean;
+    createdAt: string;
 };
 
 export type CreateTask = {

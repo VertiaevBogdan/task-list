@@ -16,7 +16,7 @@ export default function TaskCard({task, onDelete, onToggle, onEdit}: Props){
     const statusButtonStyle = task.status ? "btn-error" : "btn-success";
 
     return (
-        <li className="card bg-base-100 max-h-[10em] w-96 shadow-sm relative">
+        <li className="card bg-base-100 max-h-[10em] w-96 shadow-sm relative min-h-[13em]">
             <button
                 className="btn hover:btn-error btn-square btn-sm absolute top-2 right-2"
                 onClick={() => onDelete(task.id)}
@@ -52,7 +52,12 @@ export default function TaskCard({task, onDelete, onToggle, onEdit}: Props){
                         buttonClass={statusButtonStyle}
                         onClick={() => onToggle(task.id)}
                     />
+
+
                 </div>
+                <span className="mt-[1em]">
+                        Created: {task.createdAt}
+                    </span>
             </div>
         </li>
     )
