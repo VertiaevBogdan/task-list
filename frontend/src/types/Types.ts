@@ -17,3 +17,14 @@ export type AlertType = {
     message: string;
     type: AlertTypeValue;
 }
+
+export type SortField =
+    | "id"
+    | "title"
+    | "status"
+    | "createdAt";
+
+
+export type SortDirection =
+    | "asc"
+    | "desc";
