@@ -1,6 +1,8 @@
 import type {Task} from "../types/Types.ts";
 import Button from "./Button.tsx";
 
+import {formatDate} from "../utils/formatDate.ts";
+
 type Props = {
     task: Task;
     onDelete: (id: number) => void;
@@ -56,7 +58,7 @@ export default function TaskCard({task, onDelete, onToggle, onEdit}: Props){
 
                 </div>
                 <span className="mt-[1em]">
-                        Created: {task.createdAt}
+                        Created: {formatDate(task.createdAt)}
                     </span>
             </div>
         </li>
