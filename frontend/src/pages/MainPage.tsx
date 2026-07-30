@@ -10,7 +10,7 @@ import Alert from "../components/Alert.tsx";
 export default function MainPage(){
     const [tasks, setTasks] = useState<Task[]>([]);
     const [sortBy, setSortBy] = useState<SortField>("id"); // standard sort by id
-    const [sortDiraction, setSortDiraction] = useState<SortDirection>("asc");
+    const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingTask, setEditingTask] = useState<Task | null>(null); // evidue stav ticketu, ktery editujeme
     const [alert, setAlert] = useState<AlertType | null>(null);
@@ -39,7 +39,7 @@ export default function MainPage(){
                 new Date(b.createdAt).getTime();
         }
 
-        return sortDiraction === "asc" ? result : -result;
+        return sortDirection === "asc" ? result : -result;
     })
 
     const showAlert = (message: string, type: AlertTypeValue) => {
@@ -141,6 +141,12 @@ export default function MainPage(){
             }}
             onDelete={handleDelete}
             onToggle={handleSwitch}
+
+            sortBy={sortBy}
+            sortDirection={sortDirection}
+
+            onSortByChange={setSortBy}
+            onSortDirectionChange={setSortDirection}
         />
         {alert && <Alert
             message={alert.message}

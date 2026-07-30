@@ -1,21 +1,49 @@
 import TaskCard from "./TaskCard.tsx";
 import FilterBar from "./FilterBar.tsx";
-import type {Task} from "../types/Types.ts";
+import type {SortDirection, SortField, Task} from "../types/Types.ts";
 
 type Props = {
     tasks: Task[];
     onDelete: (id: number) => Promise<void>;
     onToggle: (id: number) => Promise<void>;
     onEdit: (task: Task) => void;
-};
-export default function TasksList({ tasks, onDelete, onToggle, onEdit} : Props){
 
+    sortBy: SortField;
+    sortDirection: SortDirection;
+
+    onSortByChange: (
+        value: SortField
+    ) => void;
+
+    onSortDirectionChange: (
+        value: SortDirection
+    ) => void;
+};
+export default function TasksList(
+    {
+        tasks,
+        onDelete,
+        onToggle,
+        onEdit,
+        sortBy,
+        sortDirection,
+        onSortByChange,
+        onSortDirectionChange
+    } : Props){
     return (
         <section>
             <span className="w-full p-4 pb-2 text-l opacity-60 tracking-wide">All tasks</span>
             <ul className="min-h-[40em] bg-base-200 rounded-box shadow-md">
                 <div className="flex justify-end p-4">
-                    <FilterBar className="flex gap-2"/>
+                    <FilterBar
+                        className="flex gap-2"
+                        sortBy={sortBy}
+                        sortDirection={sortDirection}
+                        onSortByChange={onSortByChange}
+                        onSortDirectionChange={
+                            onSortDirectionChange
+                        }
+                    />
                 </div>
                 <div className="grid grid-cols-[repeat(auto-fill,minmax(24rem,1fr))] gap-4 p-4">
                     {tasks.length > 0 ? (
