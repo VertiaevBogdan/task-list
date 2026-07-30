@@ -1,7 +1,7 @@
 import TaskForm from "../components/TaskForm.tsx";
 import EditForm from "../components/EditForm.tsx";
 import {createTask, getTasks, deleteTask, switchTaskStatus, editTask} from "../api/task.ts";
-import type {CreateTask, Task, AlertTypeValue, AlertType} from "../types/Types.ts";
+import type {CreateTask, Task, AlertTypeValue, AlertType, SortField, SortDirection} from "../types/Types.ts";
 import TasksList from "../components/TasksList.tsx";
 import {useState, useEffect} from "react";
 import Alert from "../components/Alert.tsx";
@@ -9,9 +9,38 @@ import Alert from "../components/Alert.tsx";
 
 export default function MainPage(){
     const [tasks, setTasks] = useState<Task[]>([]);
+    const [sortBy, setSortBy] = useState<SortField>("id"); // standard sort by id
+    const [sortDiraction, setSortDiraction] = useState<SortDirection>("asc");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingTask, setEditingTask] = useState<Task | null>(null); // evidue stav ticketu, ktery editujeme
     const [alert, setAlert] = useState<AlertType | null>(null);
+
+    const sortedTasks = [...tasks].sort((a, b) => {
+        let result = 0;
+
+        if (sortBy === "id"){
+            result = a.id - b.id;
+        }
+
+        if (sortBy === "title"){
+            result = a.title.localeCompare(
+                b.title,
+                "en"
+            )
+        }
+
+        if (sortBy === "status"){
+            result = Number(a.status) - Number(b.status);
+        }
+
+        if (sortBy === "createdAt"){
+            result =
+                new Date(a.createdAt).getTime() -
+                new Date(b.createdAt).getTime();
+        }
+
+        return sortDiraction === "asc" ? result : -result;
+    })
 
     const showAlert = (message: string, type: AlertTypeValue) => {
         setAlert({
@@ -105,7 +134,7 @@ export default function MainPage(){
             onClose={handleCloseEdit}
         />
         <TasksList
-            tasks={tasks}
+            tasks={sortedTasks}
             onEdit={(task) => {
                 setEditingTask(task);
                 setIsModalOpen(true);
