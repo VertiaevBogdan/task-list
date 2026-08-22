@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test';
 
+
 test.describe("CRUD task", () => {
 
-    test.use("http://localhost:8080/api/");
+    test.use();
 
     test("create task", async ({ request }) => {
         const newTask = await request.post(`tasks`, {
