@@ -1,20 +1,59 @@
 import { test, expect } from '@playwright/test';
 
 
-test.describe("CRUD task", () => {
+test.describe.serial("CRUD task", () => {
 
-    test.use();
+    let id: number;
 
-    test("create task", async ({ request }) => {
-        const newTask = await request.post(`tasks`, {
+    test("CREATE task", async ({ request }) => {
+        const response = await request.post(`tasks`, {
             data: {
                 title: "New title test",
                 text: "test text"
             }
         });
 
-        expect(newTask.status()).toBe(200);
+        expect(response.status()).toBe(200);
+
+        const responseBody = await response.json();
+        id = responseBody.id;
     });
 
+    test("READ tasks", async ({ request }) => {
+       const response = await request.get(`tasks`);
+
+       expect(response.status()).toBe(200);
+    });
+
+    test("READ task by id", async ({ request }) => {
+        const response = await request.get(`tasks/${id}`);
+
+        expect(response.status()).toBe(200);
+    });
+
+    test("UPDATE task by id", async ({ request }) => {
+        const response = await request.patch(`tasks/${id}`, {
+            data: {
+                title: "Edited title",
+                text: "Edited text"
+            }
+        });
+
+        expect(response.status()).toBe(200);
+
+    });
+
+    test("UPDATE task status by id", async ({ request }) => {
+        const response = await request.patch(`tasks/${id}/status`);
+
+        expect(response.status()).toBe(200);
+    });
+
+
+    test("DELETE task by id", async ({ request }) => {
+        const response = await request.delete(`tasks/${id}`);
+
+        expect(response.status()).toBe(200);
+    });
 
 });
