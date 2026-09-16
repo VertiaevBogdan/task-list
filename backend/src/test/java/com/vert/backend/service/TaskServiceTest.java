@@ -177,7 +177,15 @@ public class TaskServiceTest {
         taskService.deleteTaskById(1L);
 
         verify(taskRepository).deleteById(1L);
+    }
 
+    @Test
+    void shouldDeleteAllSelectedTasks(){
+        List<Long> ids = List.of(1L, 2L, 3L);
+
+        taskService.deleteTasks(ids);
+
+        verify(taskRepository).deleteAllById(ids);
     }
 
     @Test
