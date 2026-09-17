@@ -68,4 +68,8 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
+    public void deleteTasks(List<Long> ids){
+        taskRepository.deleteAllById(ids);
+    }
+
 }

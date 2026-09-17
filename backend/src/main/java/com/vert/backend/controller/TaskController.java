@@ -1,9 +1,11 @@
 package com.vert.backend.controller;
 
+import com.vert.backend.dto.request.TaskIdsRequest;
 import com.vert.backend.dto.request.TaskRequest;
 //import com.vert.backend.dto.request.UpdateTaskRequest;
 import com.vert.backend.dto.response.TaskResponse;
 import com.vert.backend.service.TaskService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,8 +37,15 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTaskById(@PathVariable Long id) {
         taskService.deleteTaskById(id);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTasks(@RequestBody TaskIdsRequest request) {
+       taskService.deleteTasks(request.getTaskIds());
     }
 
     @PatchMapping("/{id}/status")

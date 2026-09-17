@@ -126,8 +126,12 @@ export default function MainPage(){
         setEditingTask(null);
     }
     return <main>
-        <TaskForm onSave={handleSave} />
+        <TaskForm
+            data-testid="task-form"
+            onSave={handleSave}
+        />
         <EditForm
+            data-testid="edit-form"
             task={editingTask}
             isOpen={isModalOpen}
             onSave={handleEdit}
