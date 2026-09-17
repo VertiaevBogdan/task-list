@@ -2,7 +2,7 @@ package com.vert.backend.mapper;
 
 import com.vert.backend.model.entity.Task;
 import org.springframework.stereotype.Service;
-import com.vert.backend.dto.request.CreateTaskRequest;
+import com.vert.backend.dto.request.TaskRequest;
 import com.vert.backend.dto.response.TaskResponse;
 
 @Service
@@ -12,11 +12,12 @@ public class TaskMapper {
                 task.getId(),
                 task.getTitle(),
                 task.getText(),
-                task.isStatus()
+                task.isStatus(),
+                task.getCreatedAt()
         );
     }
 
-    public static Task toEntity(CreateTaskRequest request){
+    public static Task toEntity(TaskRequest request){
         return new Task(
                 request.getTitle(),
                 request.getText(),

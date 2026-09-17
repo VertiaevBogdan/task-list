@@ -1,0 +1,86 @@
+import Form from "./Form.tsx";
+import Button from "./Button.tsx";
+import {useEffect, useRef, useState} from "react";
+import type {CreateTask, Task} from "../types/Types.ts";
+
+type Props = {
+    task: Task | null;
+    isOpen: boolean;
+    onSave: (id: number, data: CreateTask) => void;
+    onClose: () => void;
+}
+
+export default function EditForm({
+                                     task,
+                                     isOpen,
+                                     onSave,
+                                     onClose
+}: Props) {
+
+    const [form, setForm] = useState({
+        title: "",
+        text: ""
+    });
+
+    const dialogRef = useRef<HTMLDialogElement>(null);
+
+    useEffect(() => {
+        if(task){
+            setForm({
+                title: task.title,
+                text: task.text
+            });
+        }
+    }, [task]);
+
+    useEffect(() => {
+        if (isOpen){
+            dialogRef.current?.showModal();
+        } else {
+            dialogRef.current?.close();
+        }
+    }, [isOpen]);
+
+    return (
+        <dialog
+            ref={dialogRef}
+            className="modal"
+        >
+                <Form
+                    title="Edit task"
+                    submitButtonText="Save"
+                    extraButtons={
+                        <Button
+                            buttonText="Discard changes"
+                            buttonClass="btn-error flex-1"
+                            type="button"
+                            onClick={onClose}
+                        />
+                    }
+                    form={form}
+                    onTitleChange={(value) => {
+                                setForm(prev => ({
+                                    ...prev,
+                                    title: value
+                                }))
+                            }}
+                    onTextChange={(value) => {
+                                setForm(prev => ({
+                                    ...prev,
+                                    text: value
+                                }))
+                            }}
+                    onSubmit={
+                    (e) => {
+                        e.preventDefault();
+
+                        if(!task){
+                            return;
+                        }
+
+                        onSave(task.id, form);
+                    }}
+                />
+        </dialog>
+    )
+}

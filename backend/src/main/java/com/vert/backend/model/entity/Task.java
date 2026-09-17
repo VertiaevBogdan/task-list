@@ -1,6 +1,10 @@
 package com.vert.backend.model.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.Instant;
 
 @Entity
 @Table(name = "TASKS")
@@ -17,6 +21,14 @@ public class Task {
 
     @Column(name = "STATUS", nullable = false)
     private boolean status = false;
+
+    @CreationTimestamp
+    @Column (name = "CREATED_AT", nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "UPDATED_AT", nullable = true)
+    private Instant updatedAt;
 
     public Task() {}
 
@@ -42,6 +54,18 @@ public class Task {
         return status;
     }
 
+    public Instant getCreatedAt(){
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt(){
+        return updatedAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setTitle(String title){
         this.title = title;
     }
@@ -52,5 +76,9 @@ public class Task {
 
     public void setStatus(boolean status){
         this.status = status;
+    }
+
+    public void setUpdatedAt(Instant timeStamp){
+        this.updatedAt = timeStamp;
     }
 }
