@@ -146,6 +146,29 @@ public class TaskServiceTest {
     }
 
     @Test
+    void shouldChangeStatusForAllSelectedTasks(){
+        Task firstTask = new Task();
+        Task secondTask = new Task();
+        
+        firstTask.setId(1L);
+        firstTask.setStatus(false);
+        secondTask.setId(2L);
+        secondTask.setStatus(false);
+        List<Long> ids = List.of(firstTask.getId(), secondTask.getId());
+
+        when(taskRepository.findAllById(ids))
+                .thenReturn(Optional.of(ids));
+
+        when(taskRepository.saveAll(ids)).thenReturn(firstTask, secondTask);
+        taskService.changeTasksStatus(ids);
+
+        assertTrue(firstTask.isStatus());
+        assertTrue(secondTask.isStatus());
+
+        verify(taskRepository.findAllById(ids));
+    }
+
+    @Test
     void shouldChangeStatusFromTrueToFalse() {
         Task task = new Task();
         task.setId(1L);
@@ -271,4 +294,5 @@ public class TaskServiceTest {
         assertEquals(newText, task.getText());
         assertEquals(title, task.getTitle());
     }
+
 }
