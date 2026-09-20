@@ -9,7 +9,7 @@ public class TaskResponse {
     private final boolean status;
     private final Instant createdAt;
 
-    public TaskResponse (Long id, String title, String text, boolean status, Instant createdAt){
+    public TaskResponse(Long id, String title, String text, boolean status, Instant createdAt) {
         this.id = id;
         this.title = title;
         this.text = text;
@@ -17,23 +17,23 @@ public class TaskResponse {
         this.createdAt = createdAt;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public String getText(){
+    public String getText() {
         return text;
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return status;
     }
 
-    public Instant getCreatedAt(){
+    public Instant getCreatedAt() {
         return createdAt;
     }
 }

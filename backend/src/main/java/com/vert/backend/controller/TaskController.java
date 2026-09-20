@@ -17,22 +17,22 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    public TaskController(TaskService taskService){
-        this.taskService  = taskService;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @GetMapping
-    public List<TaskResponse> getAllTasks(){
+    public List<TaskResponse> getAllTasks() {
         return taskService.getAllTasks();
     }
 
     @GetMapping("/{id}")
-    public Optional<TaskResponse> getTaskById(@PathVariable Long id){
+    public Optional<TaskResponse> getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id);
     }
 
     @PostMapping
-    public TaskResponse createTask(@RequestBody TaskRequest request){
+    public TaskResponse createTask(@RequestBody TaskRequest request) {
         return taskService.createTask(request);
     }
 
@@ -45,18 +45,23 @@ public class TaskController {
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTasks(@RequestBody TaskIdsRequest request) {
-       taskService.deleteTasks(request.getTaskIds());
+        taskService.deleteTasks(request.getTaskIds());
     }
 
     @PatchMapping("/{id}/status")
     public TaskResponse updateStatusTaskById(@PathVariable Long id) {
-       return taskService.updateTaskById(id);
+        return taskService.updateTaskById(id);
+    }
+
+    @PatchMapping
+    public List<TaskResponse> updateTasksStatus(@RequestBody TaskIdsRequest request) {
+        return taskService.updateTasksStatus(request.getTaskIds());
     }
 
     @PatchMapping("/{id}")
     public TaskResponse editTaskById(
             @PathVariable Long id,
-            @RequestBody TaskRequest request){
+            @RequestBody TaskRequest request) {
         return taskService.editTaskById(id, request);
     }
 
