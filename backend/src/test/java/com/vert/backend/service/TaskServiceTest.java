@@ -135,25 +135,28 @@ public class TaskServiceTest {
         assertTrue(task.isStatus());
     }
 
-//    @Test
-//    void shouldChangeStatusForAllSelectedTasks(){
-//        firstTask.setId(firstId);
-//        firstTask.setStatus(false);
-//        secondTask.setId(secondId);
-//        secondTask.setStatus(false);
-//        List<Long> ids = List.of(firstTask.getId(), secondTask.getId());
-//
-//        when(taskRepository.findAllById(ids))
-//                .thenReturn(Iterable([firstTask, secondTask]));
-//
-//        when(taskRepository.saveAll(ids)).thenReturn(firstTask, secondTask);
-//        taskService.changeTasksStatus(ids);
-//
-//        assertTrue(firstTask.isStatus());
-//        assertTrue(secondTask.isStatus());
-//
-//        verify(taskRepository.findAllById(ids));
-//    }
+    @Test
+    void shouldChangeStatusForAllSelectedTasks(){
+        firstTask.setId(firstId);
+        firstTask.setStatus(false);
+        secondTask.setId(secondId);
+        secondTask.setStatus(false);
+        List<Long> ids = List.of(firstTask.getId(), secondTask.getId());
+        List<Task> taskList = List.of(firstTask, secondTask);
+
+        when(taskRepository.findAllById(ids))
+                .thenReturn(taskList);
+
+        when(taskRepository.saveAll(taskList))
+                .thenReturn(taskList);
+        taskService.changeTasksStatus(ids);
+
+        assertTrue(firstTask.isStatus());
+        assertTrue(secondTask.isStatus());
+
+        verify(taskRepository).findAllById(ids);
+        verify(taskRepository).saveAll(taskList);
+    }
 
     @Test
     void shouldChangeStatusFromTrueToFalse() {
