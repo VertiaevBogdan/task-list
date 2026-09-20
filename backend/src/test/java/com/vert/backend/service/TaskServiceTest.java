@@ -149,7 +149,7 @@ public class TaskServiceTest {
 
         when(taskRepository.saveAll(taskList))
                 .thenReturn(taskList);
-        taskService.changeTasksStatus(ids);
+        taskService.updateTasksStatus(ids);
 
         assertTrue(firstTask.isStatus());
         assertTrue(secondTask.isStatus());

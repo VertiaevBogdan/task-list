@@ -53,6 +53,11 @@ public class TaskController {
         return taskService.updateTaskById(id);
     }
 
+    @PatchMapping
+    public List<TaskResponse> updateTasksStatus(@RequestBody TaskIdsRequest request) {
+        return taskService.updateTasksStatus(request.getTaskIds());
+    }
+
     @PatchMapping("/{id}")
     public TaskResponse editTaskById(
             @PathVariable Long id,

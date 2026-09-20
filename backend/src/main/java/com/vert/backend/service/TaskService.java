@@ -50,6 +50,17 @@ public class TaskService {
         return TaskMapper.toResponse(updatedTask);
     }
 
+    public List<TaskResponse> updateTasksStatus(List<Long> ids) {
+        List<Task> taskList = taskRepository.findAllById(ids);
+        taskList.forEach(task -> {
+            task.setStatus(true);
+        });
+        List<Task> savedTaskList = taskRepository.saveAll(taskList);
+
+        return savedTaskList.stream().map(TaskMapper::toResponse).toList();
+
+    }
+
     public TaskResponse editTaskById(Long id, TaskRequest request) {
         Task task = taskRepository.findById(id).orElseThrow(() -> TaskNotFoundException);
         if (request.title != null) {
