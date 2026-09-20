@@ -7,6 +7,7 @@ import com.vert.backend.model.entity.Task;
 import com.vert.backend.repository.TaskRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 import java.util.List;
@@ -17,23 +18,23 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final RuntimeException TaskNotFoundException = new RuntimeException("Task not found");
-    
-    public TaskService(TaskRepository taskRepository){
+
+    public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
-    
-    public List<TaskResponse> getAllTasks(){
+
+    public List<TaskResponse> getAllTasks() {
         return taskRepository.findAll(Sort.by(Sort.Direction.ASC, "id")).stream().map(TaskMapper::toResponse).toList();
     }
-    
-    public Optional<TaskResponse> getTaskById(Long id){
+
+    public Optional<TaskResponse> getTaskById(Long id) {
 
         Task task = taskRepository.findById(id).orElseThrow(() -> TaskNotFoundException);
 
         return Optional.of(TaskMapper.toResponse(task));
     }
 
-    public TaskResponse createTask(TaskRequest request){
+    public TaskResponse createTask(TaskRequest request) {
         Task task = TaskMapper.toEntity(request);
 
         Task saved = taskRepository.save(task);
@@ -41,7 +42,7 @@ public class TaskService {
         return TaskMapper.toResponse(saved);
     }
 
-    public TaskResponse updateTaskById(Long id){
+    public TaskResponse updateTaskById(Long id) {
         Task task = taskRepository.findById(id).orElseThrow(() -> TaskNotFoundException);
         task.setStatus(!task.isStatus());
         Task updatedTask = taskRepository.save(task);
@@ -49,13 +50,13 @@ public class TaskService {
         return TaskMapper.toResponse(updatedTask);
     }
 
-    public TaskResponse editTaskById(Long id, TaskRequest request){
+    public TaskResponse editTaskById(Long id, TaskRequest request) {
         Task task = taskRepository.findById(id).orElseThrow(() -> TaskNotFoundException);
-        if (request.title != null){
+        if (request.title != null) {
             task.setTitle(request.title);
         }
 
-        if (request.text != null){
+        if (request.text != null) {
             task.setText(request.text);
         }
 
@@ -64,11 +65,11 @@ public class TaskService {
         return TaskMapper.toResponse(saved);
     }
 
-    public void deleteTaskById(Long id){
+    public void deleteTaskById(Long id) {
         taskRepository.deleteById(id);
     }
 
-    public void deleteTasks(List<Long> ids){
+    public void deleteTasks(List<Long> ids) {
         taskRepository.deleteAllById(ids);
     }
 
