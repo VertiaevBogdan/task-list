@@ -4,7 +4,6 @@ import * as React from "react";
 
 type Props = {
     title: string;
-    text: string;
 
     submitButtonText: string;
 

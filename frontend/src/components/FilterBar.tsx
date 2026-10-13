@@ -1,5 +1,5 @@
 import SearchIcon from "./icons/SearchIcon.tsx";
-import type {SortDirection, SortField} from "../types/Types.ts";
+import type {SortDirection, SortField, SortOption} from "../types/Types.ts";
 
 type Props = {
     className?: string;
@@ -16,34 +16,30 @@ type Props = {
     )=> void;
 };
 
+const sortOptions : SortOption[] = [
+    {
+        value: "id",
+        label: "ID"
+    },
+    {
+        value: "title",
+        label: "Title"
+    },
+    {
+        value: "status",
+        label: "Status"
+    },
+    {
+        value: "createdAt",
+        label: "Created date"
+    }
+];
+
 export default function FilterBar(
     {
         className="",
-        sortBy,
-        sortDirection,
-        onDirectionChange,
         onSortByChange
 }: Props){
-
-    const sortOptions = [
-        {
-            value: "id",
-            label: "ID"
-        },
-        {
-            value: "title",
-            label: "Title"
-        },
-        {
-            value: "status",
-            label: "Status"
-        },
-        {
-            value: "createdAt",
-            label: "Created date"
-        }
-    ];
-
     return(
         <section>
             <div className={className}>
@@ -54,7 +50,7 @@ export default function FilterBar(
 
                 <div className="dropdown dropdown-end min-w-[7em] ">
                     <div tabIndex={0} role="button" className="btn m-1 bg-base-100">Sort by</div>
-                    <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                    <ul tabIndex={-1} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                         {sortOptions.map((option) => (
                             <li key={option.value}>
                                 <button

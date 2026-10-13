@@ -40,7 +40,7 @@ export default function TasksList(
                         sortBy={sortBy}
                         sortDirection={sortDirection}
                         onSortByChange={onSortByChange}
-                        onSortDirectionChange={
+                        onDirectionChange={
                             onSortDirectionChange
                         }
                     />
