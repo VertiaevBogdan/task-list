@@ -9,14 +9,14 @@ export type Task = {
 export type CreateTask = {
     title: string;
     text: string;
-}
+};
 
 export type AlertTypeValue = "alert-success" | "alert-error";
 
 export type AlertType = {
     message: string;
     type: AlertTypeValue;
-}
+};
 
 export type SortField =
     | "id"
@@ -24,6 +24,10 @@ export type SortField =
     | "status"
     | "createdAt";
 
+export type SortOption = {
+  value: SortField;
+  label: string;
+};
 
 export type SortDirection =
     | "asc"
