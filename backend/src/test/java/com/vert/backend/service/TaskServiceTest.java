@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.never;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 
@@ -32,7 +33,6 @@ public class TaskServiceTest {
     final String newTitle = "Edited title";
     final String text = "Test text";
     final String newText = "Edited text";
-
 
     @Mock
     private TaskRepository taskRepository;
@@ -176,9 +176,10 @@ public class TaskServiceTest {
 
         when(taskRepository.findById(firstId)).thenReturn(Optional.empty());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> taskService.getTaskById(firstId));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> taskService.updateTaskById(firstId));
 
         assertEquals("Task not found", exception.getMessage());
+        verify(taskRepository, never()).save(any());
     }
 
     @Test
@@ -198,12 +199,16 @@ public class TaskServiceTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenEditingTaskNotFound() { // rewrite
+    void shouldThrowExceptionWhenEditingTaskNotFound() {
+
+        TaskRequest request = new TaskRequest(title, text);
+
         when(taskRepository.findById(firstId)).thenReturn(Optional.empty());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> taskService.getTaskById(firstId));
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> taskService.editTaskById(firstId, request));
 
         assertEquals("Task not found", exception.getMessage());
+        verify(taskRepository, never()).save(any());
     }
 
     @Test
