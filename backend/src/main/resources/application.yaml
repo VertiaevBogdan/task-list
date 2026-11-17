@@ -18,3 +18,15 @@ spring:
 
 server:
   port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,beans,conditions
+
+app:
+  cors:
+    allowed-origins:
+      - http://localhost:5173
+      - http://localhost:5174
